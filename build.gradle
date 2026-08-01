@@ -34,6 +34,9 @@ processTestmodResources {
 }
 
 java {
+    withSourcesJar()
+    withJavadocJar()
+
     toolchain {
         languageVersion = JavaLanguageVersion.of(25)
     }
@@ -47,6 +50,18 @@ publishing {
     publications {
         maven(MavenPublication) {
             from components.java
+        }
+    }
+
+    repositories {
+        maven {
+            name = "biryeong"
+            url = uri("https://repo.biryeong.kim/releases/")
+
+            credentials {
+                username = System.getenv("BIRYEONG_REPO_USERNAME")
+                password = System.getenv("BIRYEONG_REPO_PASSWORD")
+            }
         }
     }
 }
