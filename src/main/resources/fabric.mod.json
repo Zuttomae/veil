@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "veil",
+  "version": "${version}",
+  "name": "Veil",
+  "description": "Kotlin DSL for polymer-virtual-entity",
+  "authors": [
+    "Zuttomae"
+  ],
+  "license": "Apache-2.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+    ]
+  },
+  "mixins": [
+    "veil.mixins.json"
+  ],
+  "depends": {
+    "minecraft": "~26.2-",
+    "fabricloader": ">=${fabric_loader_version}",
+    "polymer-virtual-entity": ">=${polymer_version}"
+  }
+}
