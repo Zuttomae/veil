@@ -103,14 +103,14 @@ public abstract class ElementHolderMixin implements ElementHolderHook {
             method = "startWatching(Lnet/minecraft/server/network/ServerGamePacketListenerImpl;)Z",
             at = @At(value = "RETURN")
     )
-    private void veil$invokeStartWatchingListeners(ServerGamePacketListenerImpl connection, CallbackInfoReturnable<Boolean> cir) {
+    private void veil$invokeStartWatchingListeners(ServerGamePacketListenerImpl player, CallbackInfoReturnable<Boolean> cir) {
         if (!cir.getReturnValueZ()) {
             return;
         }
 
         if (veil$startWatchingListeners != null) {
             for (StartWatchingListener listener : veil$startWatchingListeners) {
-                listener.onStartWatching(connection);
+                listener.onStartWatching(player);
             }
         }
     }
@@ -119,14 +119,14 @@ public abstract class ElementHolderMixin implements ElementHolderHook {
             method = "stopWatching(Lnet/minecraft/server/network/ServerGamePacketListenerImpl;)Z",
             at = @At(value = "RETURN")
     )
-    private void veil$invokeStopWatchingListeners(ServerGamePacketListenerImpl connection, CallbackInfoReturnable<Boolean> cir) {
+    private void veil$invokeStopWatchingListeners(ServerGamePacketListenerImpl player, CallbackInfoReturnable<Boolean> cir) {
         if (!cir.getReturnValueZ()) {
             return;
         }
 
         if (veil$stopWatchingListeners != null) {
             for (StopWatchingListener listener : veil$stopWatchingListeners) {
-                listener.onStopWatching(connection);
+                listener.onStopWatching(player);
             }
         }
     }
