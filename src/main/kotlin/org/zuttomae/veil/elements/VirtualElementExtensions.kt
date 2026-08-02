@@ -199,7 +199,7 @@ public inline fun DisplayElement.scale(v: Vector2ic, z: Float, block: Vector3f.(
 public inline fun DisplayElement.scale(xyz: FloatArray, block: Vector3f.() -> Unit = {}): Vector3f =
     vector3f(xyz, block).also { scale = it }
 
-public inline fun DisplayElement.leftRotation(block: Quaternionfc.() -> Unit = {}): Quaternionf =
+public inline fun DisplayElement.leftRotation(block: Quaternionf.() -> Unit = {}): Quaternionf =
     quaternionf(block).also { leftRotation = it }
 
 public inline fun DisplayElement.leftRotation(
@@ -207,7 +207,7 @@ public inline fun DisplayElement.leftRotation(
     y: Double,
     z: Double,
     w: Double,
-    block: Quaternionfc.() -> Unit = {}
+    block: Quaternionf.() -> Unit = {}
 ): Quaternionf = quaternionf(x, y, z, w, block).also { leftRotation = it }
 
 public inline fun DisplayElement.leftRotation(
@@ -215,26 +215,26 @@ public inline fun DisplayElement.leftRotation(
     y: Float,
     z: Float,
     w: Float,
-    block: Quaternionfc.() -> Unit = {}
+    block: Quaternionf.() -> Unit = {}
 ): Quaternionf = quaternionf(x, y, z, w, block).also { leftRotation = it }
 
-public inline fun DisplayElement.leftRotation(source: Quaternionfc, block: Quaternionfc.() -> Unit = {}): Quaternionf =
+public inline fun DisplayElement.leftRotation(source: Quaternionfc, block: Quaternionf.() -> Unit = {}): Quaternionf =
     quaternionf(source, block).also { leftRotation = it }
 
-public inline fun DisplayElement.leftRotation(source: Quaterniondc, block: Quaternionfc.() -> Unit = {}): Quaternionf =
+public inline fun DisplayElement.leftRotation(source: Quaterniondc, block: Quaternionf.() -> Unit = {}): Quaternionf =
     quaternionf(source, block).also { leftRotation = it }
 
 public inline fun DisplayElement.leftRotation(
     axisAngle: AxisAngle4f,
-    block: Quaternionfc.() -> Unit = {}
+    block: Quaternionf.() -> Unit = {}
 ): Quaternionf = quaternionf(axisAngle, block).also { leftRotation = it }
 
 public inline fun DisplayElement.leftRotation(
     axisAngle: AxisAngle4d,
-    block: Quaternionfc.() -> Unit = {}
+    block: Quaternionf.() -> Unit = {}
 ): Quaternionf = quaternionf(axisAngle, block).also { leftRotation = it }
 
-public inline fun DisplayElement.rightRotation(block: Quaternionfc.() -> Unit = {}): Quaternionf =
+public inline fun DisplayElement.rightRotation(block: Quaternionf.() -> Unit = {}): Quaternionf =
     quaternionf(block).also { rightRotation = it }
 
 public inline fun DisplayElement.rightRotation(
@@ -242,7 +242,7 @@ public inline fun DisplayElement.rightRotation(
     y: Double,
     z: Double,
     w: Double,
-    block: Quaternionfc.() -> Unit = {}
+    block: Quaternionf.() -> Unit = {}
 ): Quaternionf = quaternionf(x, y, z, w, block).also { rightRotation = it }
 
 public inline fun DisplayElement.rightRotation(
@@ -250,23 +250,23 @@ public inline fun DisplayElement.rightRotation(
     y: Float,
     z: Float,
     w: Float,
-    block: Quaternionfc.() -> Unit = {}
+    block: Quaternionf.() -> Unit = {}
 ): Quaternionf = quaternionf(x, y, z, w, block).also { rightRotation = it }
 
-public inline fun DisplayElement.rightRotation(source: Quaternionfc, block: Quaternionfc.() -> Unit = {}): Quaternionf =
+public inline fun DisplayElement.rightRotation(source: Quaternionfc, block: Quaternionf.() -> Unit = {}): Quaternionf =
     quaternionf(source, block).also { rightRotation = it }
 
-public inline fun DisplayElement.rightRotation(source: Quaterniondc, block: Quaternionfc.() -> Unit = {}): Quaternionf =
+public inline fun DisplayElement.rightRotation(source: Quaterniondc, block: Quaternionf.() -> Unit = {}): Quaternionf =
     quaternionf(source, block).also { rightRotation = it }
 
 public inline fun DisplayElement.rightRotation(
     axisAngle: AxisAngle4f,
-    block: Quaternionfc.() -> Unit = {}
+    block: Quaternionf.() -> Unit = {}
 ): Quaternionf = quaternionf(axisAngle, block).also { rightRotation = it }
 
 public inline fun DisplayElement.rightRotation(
     axisAngle: AxisAngle4d,
-    block: Quaternionfc.() -> Unit = {}
+    block: Quaternionf.() -> Unit = {}
 ): Quaternionf = quaternionf(axisAngle, block).also { rightRotation = it }
 
 public fun DisplayElement.startInterpolation(duration: Int) {
