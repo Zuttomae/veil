@@ -13,9 +13,16 @@ import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.state.BlockState
+import org.joml.Matrix4f
 import org.joml.Matrix4fc
+import org.joml.Quaternionf
+import org.joml.Quaternionfc
+import org.joml.Vector3f
+import org.joml.Vector3fc
 import org.zuttomae.veil.events.Disposable
 import org.zuttomae.veil.math.matrix4f
+import org.zuttomae.veil.math.quaternionf
+import org.zuttomae.veil.math.vector3f
 
 public inline fun blockDisplayElement(block: BlockDisplayElement.() -> Unit = {}): BlockDisplayElement =
     BlockDisplayElement().apply(block)
@@ -102,6 +109,41 @@ public var DisplayElement.transformation: Matrix4fc
     set(value) {
         setTransformation(value)
     }
+
+public inline fun DisplayElement.transformation(
+    from: Matrix4fc = transformation,
+    block: Matrix4f.() -> Unit
+): Matrix4f {
+    return matrix4f(from, block).also { transformation = it }
+}
+
+public inline fun DisplayElement.translation(
+    from: Vector3fc = translation,
+    block: Vector3f.() -> Unit
+): Vector3f {
+    return vector3f(from, block).also { translation = it }
+}
+
+public inline fun DisplayElement.leftRotation(
+    from: Quaternionfc = leftRotation,
+    block: Quaternionf.() -> Unit
+): Quaternionf {
+    return quaternionf(from, block).also { leftRotation = it }
+}
+
+public inline fun DisplayElement.scale(
+    from: Vector3fc = scale,
+    block: Vector3f.() -> Unit
+): Vector3f {
+    return vector3f(from, block).also { scale = it }
+}
+
+public inline fun DisplayElement.rightRotation(
+    from: Quaternionfc = rightRotation,
+    block: Quaternionf.() -> Unit
+): Quaternionf {
+    return quaternionf(from, block).also { rightRotation = it }
+}
 
 public fun DisplayElement.startInterpolation(duration: Int) {
     startInterpolation()
