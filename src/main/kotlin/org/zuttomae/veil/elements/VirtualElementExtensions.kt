@@ -215,12 +215,12 @@ public inline fun VirtualElement.onStopWatching(crossinline block: ElementStopWa
 public class ElementTickScope @PublishedApi internal constructor(disposable: Disposable) :
     Disposable by disposable
 {
-    public var tickCount: Int = 0
+    public var tickIndex: Int = 0
         private set
 
     @PublishedApi
     internal fun update() {
-        tickCount++
+        tickIndex++
     }
 }
 
