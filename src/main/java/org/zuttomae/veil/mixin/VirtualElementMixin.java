@@ -111,7 +111,7 @@ public abstract class VirtualElementMixin implements VirtualElement, VirtualElem
 
     @Inject(
             method = "tick",
-            at = @At(value = "TAIL")
+            at = @At(value = "HEAD")
     )
     private void veil$invokeTickListeners(CallbackInfo ci) {
         if (veil$tickListeners != null) {
