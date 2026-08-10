@@ -218,6 +218,8 @@ public class ElementTickScope @PublishedApi internal constructor(disposable: Dis
     public var tickIndex: Int = 0
         private set
 
+    public val tickCount: Int get() = tickIndex + 1
+
     @PublishedApi
     internal fun update() {
         tickIndex++
