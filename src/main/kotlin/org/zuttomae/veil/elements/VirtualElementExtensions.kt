@@ -212,7 +212,7 @@ public inline fun VirtualElement.onStopWatching(crossinline block: ElementStopWa
     return disposable
 }
 
-public class ElementPreTickScope @PublishedApi internal constructor(disposable: Disposable) :
+public class ElementTickScope @PublishedApi internal constructor(disposable: Disposable) :
     Disposable by disposable
 {
     public var tickIndex: Int = 0
@@ -226,52 +226,20 @@ public class ElementPreTickScope @PublishedApi internal constructor(disposable: 
     }
 }
 
-public inline fun VirtualElement.onPreTick(crossinline block: ElementPreTickScope.() -> Unit): Disposable {
+public inline fun VirtualElement.onTick(crossinline block: ElementTickScope.() -> Unit): Disposable {
     this as VirtualElementHook
 
-    lateinit var listener: VirtualElementHook.PreTickListener
+    lateinit var listener: VirtualElementHook.TickListener
     val disposable = Disposable {
-        `veil$removePreTickListener`(listener)
+        `veil$removeTickListener`(listener)
     }
 
-    val scope = ElementPreTickScope(disposable)
-    listener = VirtualElementHook.PreTickListener {
+    val scope = ElementTickScope(disposable)
+    listener = VirtualElementHook.TickListener {
         scope.block()
         scope.update()
     }
 
-    `veil$addPreTickListener`(listener)
-    return disposable
-}
-
-public class ElementPostTickScope @PublishedApi internal constructor(disposable: Disposable) :
-    Disposable by disposable
-{
-    public var tickIndex: Int = 0
-        private set
-
-    public val tickCount: Int get() = tickIndex + 1
-
-    @PublishedApi
-    internal fun update() {
-        tickIndex++
-    }
-}
-
-public inline fun VirtualElement.onPostTick(crossinline block: ElementPostTickScope.() -> Unit): Disposable {
-    this as VirtualElementHook
-
-    lateinit var listener: VirtualElementHook.PostTickListener
-    val disposable = Disposable {
-        `veil$removePostTickListener`(listener)
-    }
-
-    val scope = ElementPostTickScope(disposable)
-    listener = VirtualElementHook.PostTickListener {
-        scope.block()
-        scope.update()
-    }
-
-    `veil$addPostTickListener`(listener)
+    `veil$addTickListener`(listener)
     return disposable
 }
