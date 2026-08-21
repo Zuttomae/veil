@@ -190,4 +190,16 @@ public abstract class ElementHolderMixin implements ElementHolderHook {
             }
         }
     }
+
+    @Inject(
+            method = "tick",
+            at = @At(value = "TAIL")
+    )
+    private void veil$invokeAfterSyncListeners(CallbackInfo ci) {
+        if (veil$afterSyncListeners != null) {
+            for (AfterSyncListener listener : veil$afterSyncListeners) {
+                listener.onAfterSync();
+            }
+        }
+    }
 }
