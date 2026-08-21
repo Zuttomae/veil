@@ -16,9 +16,13 @@ public interface VirtualElementHook {
 
     void veil$removeStopWatchingListener(StopWatchingListener listener);
 
-    void veil$addTickListener(TickListener listener);
+    void veil$addPreTickListener(PreTickListener listener);
 
-    void veil$removeTickListener(TickListener listener);
+    void veil$removePreTickListener(PreTickListener listener);
+
+    void veil$addPostTickListener(PostTickListener listener);
+
+    void veil$removePostTickListener(PostTickListener listener);
 
     @FunctionalInterface
     interface StartWatchingListener {
@@ -31,7 +35,12 @@ public interface VirtualElementHook {
     }
 
     @FunctionalInterface
-    interface TickListener {
-        void onTick();
+    interface PreTickListener {
+        void onPreTick();
+    }
+
+    @FunctionalInterface
+    interface PostTickListener {
+        void onPostTick();
     }
 }

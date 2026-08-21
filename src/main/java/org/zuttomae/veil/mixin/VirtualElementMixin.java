@@ -29,7 +29,9 @@ public abstract class VirtualElementMixin implements VirtualElement, VirtualElem
     @Unique
     private @Nullable List<StopWatchingListener> veil$stopWatchingListeners = null;
     @Unique
-    private @Nullable List<TickListener> veil$tickListeners = null;
+    private @Nullable List<PreTickListener> veil$preTickListeners = null;
+    @Unique
+    private @Nullable List<PostTickListener> veil$postTickListeners = null;
 
     @Override
     public void veil$addStartWatchingListener(StartWatchingListener listener) {
@@ -68,20 +70,38 @@ public abstract class VirtualElementMixin implements VirtualElement, VirtualElem
     }
 
     @Override
-    public void veil$addTickListener(TickListener listener) {
+    public void veil$addPreTickListener(PreTickListener listener) {
         Objects.requireNonNull(listener);
-        if (veil$tickListeners == null) {
-            veil$tickListeners = new CopyOnWriteArrayList<>();
+        if (veil$preTickListeners == null) {
+            veil$preTickListeners = new CopyOnWriteArrayList<>();
         }
 
-        veil$tickListeners.add(listener);
+        veil$preTickListeners.add(listener);
     }
 
     @Override
-    public void veil$removeTickListener(TickListener listener) {
+    public void veil$removePreTickListener(PreTickListener listener) {
         Objects.requireNonNull(listener);
-        if (veil$tickListeners != null) {
-            veil$tickListeners.remove(listener);
+        if (veil$preTickListeners != null) {
+            veil$preTickListeners.remove(listener);
+        }
+    }
+
+    @Override
+    public void veil$addPostTickListener(PostTickListener listener) {
+        Objects.requireNonNull(listener);
+        if (veil$postTickListeners == null) {
+            veil$postTickListeners = new CopyOnWriteArrayList<>();
+        }
+
+        veil$postTickListeners.add(listener);
+    }
+
+    @Override
+    public void veil$removePostTickListener(PostTickListener listener) {
+        Objects.requireNonNull(listener);
+        if (veil$postTickListeners != null) {
+            veil$postTickListeners.remove(listener);
         }
     }
 
@@ -113,10 +133,22 @@ public abstract class VirtualElementMixin implements VirtualElement, VirtualElem
             method = "tick",
             at = @At(value = "HEAD")
     )
-    private void veil$invokeTickListeners(CallbackInfo ci) {
-        if (veil$tickListeners != null) {
-            for (TickListener listener : veil$tickListeners) {
-                listener.onTick();
+    private void veil$invokePreTickListeners(CallbackInfo ci) {
+        if (veil$preTickListeners != null) {
+            for (PreTickListener listener : veil$preTickListeners) {
+                listener.onPreTick();
+            }
+        }
+    }
+
+    @Inject(
+            method = "tick",
+            at = @At(value = "TAIL")
+    )
+    private void veil$invokePostTickListeners(CallbackInfo ci) {
+        if (veil$postTickListeners != null) {
+            for (PostTickListener listener : veil$postTickListeners) {
+                listener.onPostTick();
             }
         }
     }
