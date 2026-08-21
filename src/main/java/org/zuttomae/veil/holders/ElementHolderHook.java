@@ -22,10 +22,6 @@ public interface ElementHolderHook {
 
     void veil$removeTickListener(TickListener listener);
 
-    void veil$addAfterSyncListener(AfterSyncListener listener);
-
-    void veil$removeAfterSyncListener(AfterSyncListener listener);
-
     @FunctionalInterface
     interface StartWatchingListener {
         void onStartWatching(ServerGamePacketListenerImpl connection);
@@ -44,10 +40,5 @@ public interface ElementHolderHook {
     @FunctionalInterface
     interface TickListener {
         void onTick();
-    }
-
-    @FunctionalInterface
-    interface AfterSyncListener {
-        void onAfterSync();
     }
 }
