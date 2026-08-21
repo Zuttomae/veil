@@ -372,3 +372,35 @@ public inline fun ElementHolder.onTick(crossinline block: HolderTickScope.() -> 
     `veil$addTickListener`(listener)
     return disposable
 }
+
+public class HolderAfterSyncScope @PublishedApi internal constructor(disposable: Disposable) :
+    Disposable by disposable
+{
+    public var tickIndex: Int = 0
+        private set
+
+    public val tickCount: Int get() = tickIndex + 1
+
+    @PublishedApi
+    internal fun update() {
+        tickIndex++
+    }
+}
+
+public inline fun ElementHolder.onAfterSync(crossinline block: HolderAfterSyncScope.() -> Unit): Disposable {
+    this as ElementHolderHook
+
+    lateinit var listener: ElementHolderHook.AfterSyncListener
+    val disposable = Disposable {
+        `veil$removeAfterSyncListener`(listener)
+    }
+
+    val scope = HolderAfterSyncScope(disposable)
+    listener = ElementHolderHook.AfterSyncListener {
+        scope.block()
+        scope.update()
+    }
+
+    `veil$addAfterSyncListener`(listener)
+    return disposable
+}

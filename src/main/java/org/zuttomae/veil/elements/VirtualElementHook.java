@@ -20,6 +20,10 @@ public interface VirtualElementHook {
 
     void veil$removeTickListener(TickListener listener);
 
+    void veil$addAfterSyncListener(AfterSyncListener listener);
+
+    void veil$removeAfterSyncListener(AfterSyncListener listener);
+
     @FunctionalInterface
     interface StartWatchingListener {
         void onStartWatching(ServerGamePacketListenerImpl connection, Consumer<? super Packet<ClientGamePacketListener>> packetConsumer);
@@ -33,5 +37,10 @@ public interface VirtualElementHook {
     @FunctionalInterface
     interface TickListener {
         void onTick();
+    }
+
+    @FunctionalInterface
+    interface AfterSyncListener {
+        void onAfterSync();
     }
 }

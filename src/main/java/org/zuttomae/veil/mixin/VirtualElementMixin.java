@@ -30,6 +30,8 @@ public abstract class VirtualElementMixin implements VirtualElement, VirtualElem
     private @Nullable List<StopWatchingListener> veil$stopWatchingListeners = null;
     @Unique
     private @Nullable List<TickListener> veil$tickListeners = null;
+    @Unique
+    private @Nullable List<AfterSyncListener> veil$afterSyncListeners = null;
 
     @Override
     public void veil$addStartWatchingListener(StartWatchingListener listener) {
@@ -82,6 +84,24 @@ public abstract class VirtualElementMixin implements VirtualElement, VirtualElem
         Objects.requireNonNull(listener);
         if (veil$tickListeners != null) {
             veil$tickListeners.remove(listener);
+        }
+    }
+
+    @Override
+    public void veil$addAfterSyncListener(AfterSyncListener listener) {
+        Objects.requireNonNull(listener);
+        if (veil$afterSyncListeners == null) {
+            veil$afterSyncListeners = new CopyOnWriteArrayList<>();
+        }
+
+        veil$afterSyncListeners.add(listener);
+    }
+
+    @Override
+    public void veil$removeAfterSyncListener(AfterSyncListener listener) {
+        Objects.requireNonNull(listener);
+        if (veil$afterSyncListeners != null) {
+            veil$afterSyncListeners.remove(listener);
         }
     }
 
