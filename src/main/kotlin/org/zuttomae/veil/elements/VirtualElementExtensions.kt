@@ -99,6 +99,9 @@ public inline fun textDisplayElement(text: Component, block: TextDisplayElement.
 public fun VirtualElement.addAsPassengerTo(entity: Entity): Unit =
     VirtualEntityUtils.addVirtualPassenger(entity, *entityIds.toIntArray())
 
+public fun VirtualElement.removeAsPassengerFrom(entity: Entity): Unit =
+    VirtualEntityUtils.removeVirtualPassenger(entity, *entityIds.toIntArray())
+
 public var DisplayElement.transformation: Matrix4fc
     get() {
         return matrix4f {

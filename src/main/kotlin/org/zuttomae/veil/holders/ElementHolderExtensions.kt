@@ -268,6 +268,9 @@ public inline fun ElementHolder.textDisplayElement(
 public fun ElementHolder.addAsPassengerTo(entity: Entity): Unit =
     VirtualEntityUtils.addVirtualPassenger(entity, *entityIds.toIntArray())
 
+public fun ElementHolder.removeAsPassengerFrom(entity: Entity): Unit =
+    VirtualEntityUtils.removeVirtualPassenger(entity, *entityIds.toIntArray())
+
 public class HolderStartWatchingScope @PublishedApi internal constructor(
     disposable: Disposable,
     public val networkHandler: ServerGamePacketListenerImpl
